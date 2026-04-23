@@ -1,6 +1,7 @@
 package com.example.apicomdocker.controller;
 
 import com.example.apicomdocker.entity.dto.criarTransacaoDto;
+import com.example.apicomdocker.entity.dto.editarTransacaoDto;
 import com.example.apicomdocker.entity.transacaoEntity;
 import com.example.apicomdocker.service.transacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,12 @@ public class transacaoController {
     @DeleteMapping("/{transacaoId}")
     private ResponseEntity<Void> apagarTransacaoByIdController(@PathVariable String transacaoId){
         transacaoService.apagarTransacaoById(transacaoId);
+        return ResponseEntity.status(201).build();
+    }
+
+    @PutMapping("/{transacaoId}")
+    private ResponseEntity<Void> editarTransacaoByIdController(@PathVariable String transacaoId, @RequestBody editarTransacaoDto editarTransacaoDto){
+        transacaoService.editarTransacaoById(transacaoId, editarTransacaoDto);
         return ResponseEntity.status(201).build();
     }
 
