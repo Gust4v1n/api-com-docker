@@ -25,4 +25,8 @@ public class transacaoService {
     public List<transacaoEntity> exibirTodasTransacoes(){
         return transacaoRepository.findAll();
     }
+
+    public void apagarTransacaoById(String transacaoId){
+        transacaoRepository.deleteById(UUID.fromString(transacaoId));
+    }
 }

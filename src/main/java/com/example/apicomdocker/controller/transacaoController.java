@@ -1,12 +1,14 @@
 package com.example.apicomdocker.controller;
 
 import com.example.apicomdocker.entity.dto.criarTransacaoDto;
+import com.example.apicomdocker.entity.transacaoEntity;
 import com.example.apicomdocker.service.transacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -22,7 +24,14 @@ public class transacaoController {
     }
 
     @GetMapping
-    private ResponseEntity exibirTodasTransacoesController(){
+    private ResponseEntity<List<transacaoEntity>> exibirTodasTransacoesController(){
         return ResponseEntity.ok(transacaoService.exibirTodasTransacoes());
     }
+
+    @DeleteMapping("/{transacaoId}")
+    private ResponseEntity<Void> apagarTransacaoByIdController(@PathVariable String transacaoId){
+        transacaoService.apagarTransacaoById(transacaoId);
+        return ResponseEntity.status(201).build();
+    }
+
 }
